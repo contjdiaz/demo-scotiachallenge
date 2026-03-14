@@ -1,22 +1,13 @@
-package com.scotiachallenge.demo.Entity;
+package main.java.com.scotiachallenge.demo.infraestructure.web.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import main.java.com.scotiachallenge.demo.domain.model.Estado;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "alumno")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Alumno {
-    @Id
+public class AlumnoRequest {
     private Long id;
 
     @NotBlank(message = "El nombre es obligatorio")
