@@ -1,8 +1,8 @@
-package main.java.com.scotiachallenge.demo.application.usecase.impl;
-import main.java.com.scotiachallenge.demo.application.usecase.GuardarAlumnoUseCase;
-import main.java.com.scotiachallenge.demo.domain.exception.DuplicateIdException;
-import main.java.com.scotiachallenge.demo.domain.model.Alumno;
-import main.java.com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
+package com.scotiachallenge.demo.application.usecase.impl;
+import com.scotiachallenge.demo.application.usecase.GuardarAlumnoUseCase;
+import com.scotiachallenge.demo.domain.exception.DuplicateIdException;
+import com.scotiachallenge.demo.domain.model.Alumno;
+import com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

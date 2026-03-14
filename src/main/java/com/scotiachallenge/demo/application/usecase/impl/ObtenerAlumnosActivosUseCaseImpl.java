@@ -1,9 +1,9 @@
-package main.java.com.scotiachallenge.demo.application.usecase.impl;
+package com.scotiachallenge.demo.application.usecase.impl;
 
-import main.java.com.scotiachallenge.demo.application.usecase.ObtenerAlumnosActivosUseCase;
-import main.java.com.scotiachallenge.demo.domain.model.Alumno;
-import main.java.com.scotiachallenge.demo.domain.model.Estado;
-import main.java.com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
+import com.scotiachallenge.demo.application.usecase.ObtenerAlumnosActivosUseCase;
+import com.scotiachallenge.demo.domain.model.Alumno;
+import com.scotiachallenge.demo.domain.model.Estado;
+import com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 

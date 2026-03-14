@@ -1,6 +1,6 @@
-package main.java.com.scotiachallenge.demo.infraestructure.web.dto;
+package com.scotiachallenge.demo.infraestructure.web.dto;
 
-import main.java.com.scotiachallenge.demo.domain.model.Estado;
+import com.scotiachallenge.demo.domain.model.Estado;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,9 +1,9 @@
-package main.java.com.scotiachallenge.demo.infraestructure.web.controller;
+package com.scotiachallenge.demo.infraestructure.web.controller;
 
-import main.java.com.scotiachallenge.demo.application.usecase.GuardarAlumnoUseCase;
-import main.java.com.scotiachallenge.demo.application.usecase.ObtenerAlumnosActivosUseCase;
-import main.java.com.scotiachallenge.demo.domain.model.Alumno;
-import main.java.com.scotiachallenge.demo.infraestructure.web.dto.AlumnoRequest;
+import com.scotiachallenge.demo.application.usecase.GuardarAlumnoUseCase;
+import com.scotiachallenge.demo.application.usecase.ObtenerAlumnosActivosUseCase;
+import com.scotiachallenge.demo.domain.model.Alumno;
+import com.scotiachallenge.demo.infraestructure.web.dto.AlumnoRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

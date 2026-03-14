@@ -1,4 +1,4 @@
-package main.java.com.scotiachallenge.demo.domain.exception;
+package com.scotiachallenge.demo.domain.exception;
 
 public class DuplicateIdException  extends RuntimeException {
     public DuplicateIdException(String message) {

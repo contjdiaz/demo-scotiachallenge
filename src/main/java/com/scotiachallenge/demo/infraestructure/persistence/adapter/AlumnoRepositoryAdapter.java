@@ -1,10 +1,10 @@
-package main.java.com.scotiachallenge.demo.infraestructure.persistence.adapter;
+package com.scotiachallenge.demo.infraestructure.persistence.adapter;
 
-import main.java.com.scotiachallenge.demo.domain.model.Alumno;
-import main.java.com.scotiachallenge.demo.domain.model.Estado;
-import main.java.com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
-import main.java.com.scotiachallenge.demo.infraestructure.persistence.entity.JpaAlumno;
-import main.java.com.scotiachallenge.demo.infraestructure.persistence.repository.JpaAlumnoRepository;
+import com.scotiachallenge.demo.domain.model.Alumno;
+import com.scotiachallenge.demo.domain.model.Estado;
+import com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
+import com.scotiachallenge.demo.infraestructure.persistence.entity.JpaAlumno;
+import com.scotiachallenge.demo.infraestructure.persistence.repository.JpaAlumnoRepository;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

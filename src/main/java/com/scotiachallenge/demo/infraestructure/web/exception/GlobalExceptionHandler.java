@@ -1,6 +1,6 @@
-package main.java.com.scotiachallenge.demo.infraestructure.web.exception;
+package com.scotiachallenge.demo.infraestructure.web.exception;
 
-import main.java.com.scotiachallenge.demo.domain.exception.DuplicateIdException;
+import com.scotiachallenge.demo.domain.exception.DuplicateIdException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

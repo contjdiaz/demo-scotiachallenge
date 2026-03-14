@@ -1,6 +1,6 @@
-package main.java.com.scotiachallenge.demo.infraestructure.persistence.entity;
+package com.scotiachallenge.demo.infraestructure.persistence.entity;
 
-import main.java.com.scotiachallenge.demo.domain.model.Estado;
+import com.scotiachallenge.demo.domain.model.Estado;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
