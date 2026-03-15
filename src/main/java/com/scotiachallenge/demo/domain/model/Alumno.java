@@ -20,4 +20,21 @@ public class Alumno {
     public String getApellido() { return apellido; }
     public Estado getEstado() { return estado; }
     public int getEdad() { return edad; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alumno alumno = (Alumno) o;
+        return edad == alumno.edad &&
+               java.util.Objects.equals(id, alumno.id) &&
+               java.util.Objects.equals(nombre, alumno.nombre) &&
+               java.util.Objects.equals(apellido, alumno.apellido) &&
+               estado == alumno.estado;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, nombre, apellido, estado, edad);
+    }
 }
