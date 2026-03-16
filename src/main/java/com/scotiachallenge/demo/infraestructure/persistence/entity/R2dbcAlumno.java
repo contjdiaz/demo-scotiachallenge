@@ -13,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JpaAlumno implements Persistable<Long> {
+public class R2dbcAlumno implements Persistable<Long> {
     @Id
     private Long id;
     private String nombre;
