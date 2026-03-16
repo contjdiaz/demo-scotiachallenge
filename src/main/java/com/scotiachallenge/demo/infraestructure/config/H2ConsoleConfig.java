@@ -2,6 +2,7 @@ package com.scotiachallenge.demo.infraestructure.config;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.h2.tools.Server;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 public class H2ConsoleConfig {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
+    @ConditionalOnProperty(name = "app.h2.web.enabled", havingValue = "true", matchIfMissing = true)
     public Server h2WebServer() throws SQLException {
         return Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082");
     }

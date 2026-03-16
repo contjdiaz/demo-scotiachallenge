@@ -32,7 +32,7 @@ class AlumnoRepositoryAdapterTest {
     @Test
     void save_DebeGuardarAlumno() {
         Alumno alumno = new Alumno(1L, "Juan", "Perez", Estado.ACTIVO, 20);
-        JpaAlumno jpaAlumno = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20);
+        JpaAlumno jpaAlumno = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20, false);
         when(jpaRepository.save(any(JpaAlumno.class))).thenReturn(Mono.just(jpaAlumno));
 
         StepVerifier.create(adapter.save(alumno))
@@ -41,8 +41,8 @@ class AlumnoRepositoryAdapterTest {
 
     @Test
     void findByEstado_DebeRetornarAlumnos() {
-        JpaAlumno jpaAlumno1 = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20);
-        JpaAlumno jpaAlumno2 = new JpaAlumno(2L, "Maria", "Gomez", "ACTIVO", 22);
+        JpaAlumno jpaAlumno1 = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20, false);
+        JpaAlumno jpaAlumno2 = new JpaAlumno(2L, "Maria", "Gomez", "ACTIVO", 22, false);
 
         when(jpaRepository.findByEstado("ACTIVO")).thenReturn(Flux.just(jpaAlumno1, jpaAlumno2));
 

@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class AlumnoRequest {
+    @NotNull(message = "El id es obligatorio")
     private Long id;
 
     @NotBlank(message = "El nombre es obligatorio")
