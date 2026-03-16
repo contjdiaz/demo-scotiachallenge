@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -32,8 +32,8 @@ class AlumnoRepositoryAdapterTest {
     @Test
     void save_DebeGuardarAlumno() {
         Alumno alumno = new Alumno(1L, "Juan", "Perez", Estado.ACTIVO, 20);
-        JpaAlumno jpaAlumno = new JpaAlumno(1L, "Juan", "Perez", Estado.ACTIVO, 20);
-        when(jpaRepository.save(any(JpaAlumno.class))).thenReturn(jpaAlumno);
+        JpaAlumno jpaAlumno = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20);
+        when(jpaRepository.save(any(JpaAlumno.class))).thenReturn(Mono.just(jpaAlumno));
 
         StepVerifier.create(adapter.save(alumno))
                 .verifyComplete();
@@ -41,10 +41,10 @@ class AlumnoRepositoryAdapterTest {
 
     @Test
     void findByEstado_DebeRetornarAlumnos() {
-        JpaAlumno jpaAlumno1 = new JpaAlumno(1L, "Juan", "Perez", Estado.ACTIVO, 20);
-        JpaAlumno jpaAlumno2 = new JpaAlumno(2L, "Maria", "Gomez", Estado.ACTIVO, 22);
+        JpaAlumno jpaAlumno1 = new JpaAlumno(1L, "Juan", "Perez", "ACTIVO", 20);
+        JpaAlumno jpaAlumno2 = new JpaAlumno(2L, "Maria", "Gomez", "ACTIVO", 22);
 
-        when(jpaRepository.findByEstado(Estado.ACTIVO)).thenReturn(List.of(jpaAlumno1, jpaAlumno2));
+        when(jpaRepository.findByEstado("ACTIVO")).thenReturn(Flux.just(jpaAlumno1, jpaAlumno2));
 
         StepVerifier.create(adapter.findByEstado(Estado.ACTIVO))
                 .expectNextMatches(alumno -> alumno.getId().equals(1L))
@@ -54,7 +54,7 @@ class AlumnoRepositoryAdapterTest {
 
     @Test
     void existsById_DebeRetornarTrue() {
-        when(jpaRepository.existsById(1L)).thenReturn(true);
+        when(jpaRepository.existsById(1L)).thenReturn(Mono.just(true));
 
         StepVerifier.create(adapter.existsById(1L))
                 .expectNext(true)

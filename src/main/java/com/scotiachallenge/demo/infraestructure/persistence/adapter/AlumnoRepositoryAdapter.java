@@ -8,7 +8,6 @@ import com.scotiachallenge.demo.infraestructure.persistence.repository.JpaAlumno
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 @Component
 public class AlumnoRepositoryAdapter implements AlumnoRepositoryPort {
@@ -20,33 +19,32 @@ public class AlumnoRepositoryAdapter implements AlumnoRepositoryPort {
 
     @Override
     public Mono<Void> save(Alumno alumno) {
-        return Mono.fromCallable(() -> {
-            jpaRepository.save(mapToJpa(alumno));
-            return null;
-        }).subscribeOn(Schedulers.boundedElastic()).then();
+        return jpaRepository.save(mapToJpa(alumno)).then();
     }
 
     @Override
     public Flux<Alumno> findByEstado(Estado estado) {
-        return Mono.fromCallable(() -> jpaRepository.findByEstado(estado))
-                .flatMapMany(Flux::fromIterable)
-                .map(this::mapToDomain)
-                .subscribeOn(Schedulers.boundedElastic());
+        return jpaRepository.findByEstado(estado.name())
+                .map(this::mapToDomain);
     }
 
     @Override
     public Mono<Boolean> existsById(Long id) {
-        return Mono.fromCallable(() -> jpaRepository.existsById(id))
-                .subscribeOn(Schedulers.boundedElastic());
+        return jpaRepository.existsById(id);
     }
 
     private JpaAlumno mapToJpa(Alumno alumno) {
-        return new JpaAlumno(alumno.getId(), alumno.getNombre(), alumno.getApellido(),
-                             alumno.getEstado(), alumno.getEdad());
+        JpaAlumno jpa = new JpaAlumno();
+        jpa.setId(alumno.getId());
+        jpa.setNombre(alumno.getNombre());
+        jpa.setApellido(alumno.getApellido());
+        jpa.setEstadoEnum(alumno.getEstado());
+        jpa.setEdad(alumno.getEdad());
+        return jpa;
     }
 
     private Alumno mapToDomain(JpaAlumno jpa) {
         return new Alumno(jpa.getId(), jpa.getNombre(), jpa.getApellido(),
-                          jpa.getEstado(), jpa.getEdad());
+                          jpa.getEstadoEnum(), jpa.getEdad());
     }
 }

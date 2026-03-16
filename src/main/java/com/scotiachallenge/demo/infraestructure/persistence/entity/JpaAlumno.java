@@ -1,18 +1,13 @@
 package com.scotiachallenge.demo.infraestructure.persistence.entity;
 
 import com.scotiachallenge.demo.domain.model.Estado;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "alumno")
+@Table("alumno")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,9 +16,14 @@ public class JpaAlumno {
     private Long id;
     private String nombre;
     private String apellido;
-
-    @Enumerated(EnumType.STRING)
-    private Estado estado;
-
+    private String estado;
     private int edad;
+
+    public Estado getEstadoEnum() {
+        return Estado.valueOf(this.estado);
+    }
+
+    public void setEstadoEnum(Estado estado) {
+        this.estado = estado.name();
+    }
 }

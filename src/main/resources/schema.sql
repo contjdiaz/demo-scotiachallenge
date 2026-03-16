@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS alumno (
+    id BIGINT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    apellido VARCHAR(255) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    edad INT NOT NULL
+);

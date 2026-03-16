@@ -1,11 +1,11 @@
 package com.scotiachallenge.demo.infraestructure.persistence.repository;
-import java.util.List;
 
-import com.scotiachallenge.demo.domain.model.Estado;
 import com.scotiachallenge.demo.infraestructure.persistence.entity.JpaAlumno;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Flux;
 
-public interface JpaAlumnoRepository extends JpaRepository<JpaAlumno, Long>{
-    List<JpaAlumno> findByEstado(Estado estado);
+public interface JpaAlumnoRepository extends ReactiveCrudRepository<JpaAlumno, Long> {
+    @Query("SELECT * FROM alumno WHERE estado = :estado")
+    Flux<JpaAlumno> findByEstado(String estado);
 }
