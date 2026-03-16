@@ -19,7 +19,10 @@ public class AlumnoRepositoryAdapter implements AlumnoRepositoryPort {
 
     @Override
     public Mono<Void> save(Alumno alumno) {
-        return jpaRepository.save(mapToJpa(alumno)).then();
+        JpaAlumno jpa = mapToJpa(alumno);
+        // Force insert for creates when an ID is provided.
+        jpa.markNew();
+        return jpaRepository.save(jpa).then();
     }
 
     @Override
