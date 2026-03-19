@@ -57,6 +57,10 @@ tasks.named('test') {
 	finalizedBy jacocoTestReport
 }
 
+springBoot {
+    buildInfo()
+}
+
 jacoco {
 	toolVersion = '0.8.12'
 }
