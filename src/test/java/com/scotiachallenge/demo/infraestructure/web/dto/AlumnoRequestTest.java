@@ -80,6 +80,36 @@ class AlumnoRequestTest {
         assertTrue(violations.stream().anyMatch(v -> "La edad no puede ser negativa".equals(v.getMessage())));
     }
 
+    @Test
+    void validar_DebeRechazarNombreMuyLargo() {
+        AlumnoRequest request = buildValidRequest();
+        request.setNombre("A".repeat(101));
+
+        Set<ConstraintViolation<AlumnoRequest>> violations = validator.validate(request);
+
+        assertTrue(violations.stream().anyMatch(v -> "El nombre no puede exceder 100 caracteres".equals(v.getMessage())));
+    }
+
+    @Test
+    void validar_DebeRechazarApellidoMuyLargo() {
+        AlumnoRequest request = buildValidRequest();
+        request.setApellido("A".repeat(101));
+
+        Set<ConstraintViolation<AlumnoRequest>> violations = validator.validate(request);
+
+        assertTrue(violations.stream().anyMatch(v -> "El apellido no puede exceder 100 caracteres".equals(v.getMessage())));
+    }
+
+    @Test
+    void validar_DebeRechazarEdadMayorA120() {
+        AlumnoRequest request = buildValidRequest();
+        request.setEdad(121);
+
+        Set<ConstraintViolation<AlumnoRequest>> violations = validator.validate(request);
+
+        assertTrue(violations.stream().anyMatch(v -> "La edad no puede ser mayor a 120".equals(v.getMessage())));
+    }
+
     private AlumnoRequest buildValidRequest() {
         AlumnoRequest request = new AlumnoRequest();
         request.setId(1L);

@@ -5,10 +5,12 @@ import com.scotiachallenge.demo.domain.model.Estado;
 import com.scotiachallenge.demo.domain.port.AlumnoRepositoryPort;
 import com.scotiachallenge.demo.infraestructure.persistence.entity.R2dbcAlumno;
 import com.scotiachallenge.demo.infraestructure.persistence.repository.R2dbcAlumnoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Component
 public class AlumnoRepositoryAdapter implements AlumnoRepositoryPort {
     private final R2dbcAlumnoRepository jpaRepository;
@@ -19,20 +21,25 @@ public class AlumnoRepositoryAdapter implements AlumnoRepositoryPort {
 
     @Override
     public Mono<Void> save(Alumno alumno) {
+        log.debug("Guardando alumno en base de datos con ID: {}", alumno.getId());
         R2dbcAlumno jpa = mapToJpa(alumno);
         // Force insert for creates when an ID is provided.
         jpa.markNew();
-        return jpaRepository.save(jpa).then();
+        return jpaRepository.save(jpa)
+                .doOnSuccess(saved -> log.debug("Alumno guardado exitosamente con ID: {}", saved.getId()))
+                .then();
     }
 
     @Override
     public Flux<Alumno> findByEstado(Estado estado) {
+        log.debug("Buscando alumnos por estado: {}", estado);
         return jpaRepository.findByEstado(estado.name())
                 .map(this::mapToDomain);
     }
 
     @Override
     public Mono<Boolean> existsById(Long id) {
+        log.debug("Verificando existencia de alumno con ID: {}", id);
         return jpaRepository.existsById(id);
     }
 

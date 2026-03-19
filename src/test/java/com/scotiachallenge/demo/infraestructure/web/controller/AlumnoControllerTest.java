@@ -87,8 +87,10 @@ class AlumnoControllerTest {
                 .bodyValue(request)
                 .exchange()
                 .expectStatus().isBadRequest()
-                .expectBody(String.class)
-                .isEqualTo("No se pudo hacer la grabacion: ID repetido");
+                .expectBody()
+                .jsonPath("$.message").isEqualTo("No se pudo hacer la grabacion: ID repetido")
+                .jsonPath("$.status").isEqualTo(400)
+                .jsonPath("$.timestamp").exists();
     }
 
     @Test
@@ -106,8 +108,10 @@ class AlumnoControllerTest {
                 .bodyValue(request)
                 .exchange()
                 .expectStatus().isBadRequest()
-                .expectBody(String.class)
-                .isEqualTo("El id es obligatorio");
+                .expectBody()
+                .jsonPath("$.message").isEqualTo("El id es obligatorio")
+                .jsonPath("$.status").isEqualTo(400)
+                .jsonPath("$.timestamp").exists();
     }
 
     @Test
